@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register - JobConnect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* Reset & base */
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #007acc, #66acd2);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      color: #222;
+    }
+
+    /* Navbar */
+    header {
+      width: 100%;
+      background: #003366;
+      padding: 1rem 0;
+      color: white;
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.5rem;
+      letter-spacing: 2px;
+      user-select: none;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+      margin-bottom: 2rem;
+    }
+
+    /* Container */
+    .registration-container {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      max-width: 400px;
+      width: 90%;
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .registration-container h1 {
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+      color: #004080;
+      font-size: 2rem;
+    }
+
+    .registration-container p {
+      margin-bottom: 2rem;
+      color: #555;
+      font-size: 1rem;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      align-items: stretch;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    select,
+    input[type="file"] {
+      padding: 0.85rem 1rem;
+      border-radius: 8px;
+      border: 1.5px solid #ccc;
+      font-size: 1rem;
+      transition: border-color 0.3s ease;
+      outline-offset: 2px;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus,
+    select:focus,
+    input[type="file"]:focus {
+      border-color: #007acc;
+      outline: none;
+    }
+
+    .checkbox-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.9rem;
+      color: #333;
+      user-select: none;
+      justify-content: flex-start;
+    }
+
+    .checkbox-container input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: #007acc;
+      cursor: pointer;
+    }
+
+    /* Centered button */
+    button {
+      max-width: 190px;
+      padding: 0.75 rem 0;
+      margin: 0 auto;
+      background-color: #007acc;
+      color: white;
+      border: none;
+      border-radius: 9px;
+      font-weight: 600;
+      font-size: 1 rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      user-select: none;
+      display: block;
+    }
+
+    button:hover {
+      background-color: #005f99;
+    }
+
+    .link {
+      margin-top: 1.5rem;
+      color: #007acc;
+      font-size: 0.9rem;
+      text-decoration: none;
+      display: block;
+    }
+
+    .link:hover {
+      text-decoration: underline;
+    }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .registration-container {
+        padding: 2rem 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>JobConnect</header>
+
+  <div class="registration-container">
+    <h1>Join JobConnect</h1>
+    <p>Create an account to get started</p>
+    <form action="/auth/register" method="POST" enctype="multipart/form-data">
+      <input type="text" name="name" placeholder="Full Name" required />
+      <input type="email" name="email" placeholder="Email Address" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <select name="role" required>
+        <option value="">Select Role</option>
+        <option value="JobSeeker">Job Seeker</option>
+        <option value="Employer">Employer</option>
+      </select>
+      <input type="file" name="validDocument" />
+      <div class="checkbox-container">
+        <input type="checkbox" name="terms" id="terms" required />
+        <label for="terms">I agree to the terms and conditions</label>
+      </div>
+      <button type="submit">Register</button>
+    </form>
+    <a href="/login" class="link">Already have an account? Sign in</a>
+  </div>
+
+</body>
+</html>

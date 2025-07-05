@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - JobConnect</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(to right, #cfd9df, #e2ebf0);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 1rem;
+    }
+
+    .login-container {
+      background-color: #ffffff;
+      padding: 2rem;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .login-container h1 {
+      font-size: 2rem;
+      font-weight: 600;
+      color: #004080;
+      margin-bottom: 1rem;
+    }
+
+    .input-container {
+      position: relative;
+      margin-bottom: 1.25rem;
+    }
+
+    .input-container input {
+      width: 100%;
+      padding: 0.75rem 1rem 0.75rem 2.75rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 1rem;
+      color: #333;
+      background-color: #f8faff;
+    }
+
+    .input-container i {
+      position: absolute;
+      top: 50%;
+      left: 1rem;
+      transform: translateY(-50%);
+      color: #6a7b94;
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #004080;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .login-container button:hover {
+      background-color: #003060;
+    }
+
+    .login-container .link {
+      display: block;
+      margin-top: 1.25rem;
+      font-size: 0.9rem;
+      color: #0066cc;
+      text-decoration: none;
+    }
+
+    .login-container .link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h1>Welcome Back</h1>
+    <form action="/auth/login" method="POST">
+      <div class="input-container">
+        <i class="fa fa-envelope"></i>
+        <input type="email" name="email" placeholder="Email Address" required>
+      </div>
+
+      <div class="input-container">
+        <i class="fa fa-lock"></i>
+        <input type="password" name="password" placeholder="Password" required>
+      </div>
+
+      <button type="submit">Login</button>
+      <a href="/register" class="link">Don't have an account? Register</a>
+    </form>
+  </div>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</body>
+</html>

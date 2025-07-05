@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Employer Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #e0eafc, #cfdef3);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    nav {
+      background: rgba(255, 255, 255, 0.6);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav .title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: #1f2937;
+    }
+
+    .nav-buttons a {
+      margin-left: 1rem;
+      text-decoration: none;
+      background: #2563eb;
+      color: #fff;
+      padding: 0.5rem 1rem;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      transition: background 0.3s;
+    }
+
+    .nav-buttons a:hover {
+      background: #1d4ed8;
+    }
+
+    header {
+      text-align: center;
+      padding: 3rem 1rem;
+      color: #1e3a8a;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      color: #374151;
+      margin-top: 0.5rem;
+    }
+
+    main {
+      flex: 1;
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: #111827;
+    }
+
+    .company-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .company-card {
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 16px;
+      padding: 1.5rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .company-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    .company-card h3 {
+      color: #1e40af;
+      margin-bottom: 1rem;
+    }
+
+    .company-card p {
+      color: #4b5563;
+      margin-bottom: 0.8rem;
+      font-size: 0.95rem;
+    }
+
+    .button-center {
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    .company-card a {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background: #1e40af;
+      color: #fff;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      text-decoration: none;
+      transition: background 0.3s;
+    }
+
+    .company-card a:hover {
+      background: #1e3a8a;
+    }
+
+    .no-companies {
+      text-align: center;
+      color: #6b7280;
+      font-size: 1.1rem;
+      margin-top: 2rem;
+    }
+
+    footer {
+      background: #1e40af;
+      color: #ffffff;
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 0.9rem;
+      margin-top: auto;
+    }
+
+    @media (max-width: 640px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      .nav-buttons {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        margin-left: 1rem;
+      }
+
+      .nav-buttons a {
+        margin-left: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="title">Dashboard</div>
+    <div class="nav-buttons">
+      <a href="/company/register">Register Company</a>
+      <a href="/logout">Logout</a>
+    </div>
+  </nav>
+
+  <!-- Header -->
+  <header>
+    <h1>Welcome to Your Company Dashboard</h1>
+    <p>Manage your companies and job listings in one place.</p>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <h2>Registered Companies</h2>
+    <div class="company-grid">
+      <% if (companies && companies.length > 0) { %>
+        <% companies.forEach(company => { %>
+          <div class="company-card">
+            <h3><%= company.companyName %></h3>
+            <p><strong>Address:</strong> <%= company.address %></p>
+            <p><strong>Contact:</strong> <%= company.contactInfo %></p>
+            <div class="button-center">
+              <a href="/company/<%= company.companyId %>/jobs">Manage Jobs</a>
+            </div>
+          </div>
+        <% }) %>
+      <% } else { %>
+        <p class="no-companies">No companies registered yet.</p>
+      <% } %>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 Job Portal. All rights reserved.
+  </footer>
+
+</body>
+</html>

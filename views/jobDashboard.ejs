@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Manage Jobs - <%= company.companyName %></title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: #f6f7fb;
+      color: #333;
+    }
+
+    header {
+      background-color: #2f68d9;
+      padding: 1rem 2rem;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      font-size: 1.5rem;
+    }
+
+    nav a {
+      color: #fff;
+      margin-left: 1rem;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .main-content {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 1rem;
+    }
+
+    section {
+      background: #fff;
+      border-radius: 8px;
+      padding: 1.5rem 2rem;
+      margin-bottom: 2rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    section h2 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: #111827;
+    }
+
+    form label {
+      font-weight: 600;
+      display: block;
+      margin: 1rem 0 0.25rem;
+    }
+
+    input, textarea, select {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-bottom: 1rem;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #3b82f6;
+    }
+
+    button {
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-right: 0.5rem;
+    }
+
+    .btn-approve { background-color: #10b981; color: #fff; }
+    .btn-reject { background-color: #facc15; color: #000; }
+    .btn-delete { background-color: #ef4444; color: #fff; }
+    button:hover { opacity: 0.9; }
+
+    .job-listings {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .job-card {
+      border: 1px solid #e5e7eb;
+      background: #f9fafb;
+      border-radius: 8px;
+      padding: 1rem 1.25rem;
+      transition: box-shadow 0.3s;
+    }
+
+    .job-card:hover {
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    }
+
+    .job-card h3 {
+      font-size: 1.1rem;
+      color: #1f2937;
+      margin-bottom: 0.5rem;
+    }
+
+    .job-card p {
+      margin: 0.3rem 0;
+      font-size: 0.95rem;
+      color: #4b5563;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    th {
+      background-color: #3b82f6;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f5f9;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      nav {
+        margin-top: 1rem;
+      }
+
+      nav a {
+        display: block;
+        margin: 0.5rem 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Manage Jobs - <%= company.companyName %></h1>
+    <nav>
+      <a href="#createJobForm">Create Job</a>
+      <a href="#jobListings">Job Listings</a>
+      <a href="#jobApplications">Applications</a>
+      <a href="/employer/dashboard">Back</a>
+    </nav>
+  </header>
+
+  <div class="main-content">
+    <section id="createJobForm">
+      <h2>Create New Job</h2>
+      <form action="/company/<%= company.companyId %>/jobs/create" method="POST">
+        <label for="jobTitle">Job Title</label>
+        <input type="text" id="jobTitle" name="jobTitle" required>
+
+        <label for="jobDescription">Job Description</label>
+        <textarea id="jobDescription" name="jobDescription" rows="4"></textarea>
+
+        <label for="salary">Salary</label>
+        <input type="number" id="salary" name="salary" required>
+
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location" required>
+
+        <label for="jobType">Job Type</label>
+        <select id="jobType" name="jobType" required>
+          <option value="Full-time">Full-time</option>
+          <option value="Part-time">Part-time</option>
+        </select>
+
+        <label for="postingDate">Posting Date</label>
+        <input type="date" id="postingDate" name="postingDate" required>
+
+        <label for="expiryDate">Expiry Date</label>
+        <input type="date" id="expiryDate" name="expiryDate" required>
+
+        <button type="submit" style="background-color:#3b82f6; color:#fff;">Create Job</button>
+      </form>
+    </section>
+
+    <section id="jobListings">
+      <h2>Your Job Listings</h2>
+      <% if (jobs && jobs.length > 0) { %>
+        <div class="job-listings">
+          <% jobs.forEach(job => { %>
+            <div class="job-card">
+              <h3><%= job.jobTitle %></h3>
+              <p><strong>Description:</strong> <%= job.jobDescription %></p>
+              <p><strong>Salary:</strong> $<%= job.salary %></p>
+              <p><strong>Location:</strong> <%= job.location %></p>
+              <p><strong>Type:</strong> <%= job.jobType %></p>
+              <p><strong>Posted:</strong> <%= job.postingDate.toISOString().split('T')[0] %></p>
+              <p><strong>Expires:</strong> <%= job.expiryDate.toISOString().split('T')[0] %></p>
+            </div>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <p>No job listings found.</p>
+      <% } %>
+    </section>
+
+    <section id="jobApplications">
+      <h2>View/Manage Job Applications</h2>
+      <% if (applications && applications.length > 0) { %>
+        <table>
+          <thead>
+            <tr>
+              <th>Applicant Name</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Resume</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% applications.forEach(application => { %>
+              <tr>
+                <td><%= application.User.name %></td>
+                <td><%= application.User.email %></td>
+                <td><%= application.status %></td>
+                <td>
+                  <% if (application.User.validDocument) { %>
+                    <a href="/<%= application.User.validDocument %>" target="_blank">View Resume</a>
+                  <% } else { %>
+                    N/A
+                  <% } %>
+                </td>
+                <td>
+                  <form action="/applications/<%= application.id %>/approve" method="POST" style="display:inline;">
+                    <button class="btn-approve" type="submit">Approve</button>
+                  </form>
+                  <form action="/applications/<%= application.id %>/reject" method="POST" style="display:inline;">
+                    <button class="btn-reject" type="submit">Reject</button>
+                  </form>
+                  <form action="/applications/<%= application.id %>/delete" method="POST" style="display:inline;">
+                    <button class="btn-delete" type="submit">Delete</button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      <% } else { %>
+        <p>No applications available.</p>
+      <% } %>
+    </section>
+  </div>
+</body>
+</html>

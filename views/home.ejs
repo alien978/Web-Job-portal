@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JobConnect - Your Future Awaits</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: #333;
+      background-color: #f9fafb;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: #ffffff;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar a.brand {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #1a202c;
+    }
+
+    .navbar-menu {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+
+    .navbar-menu a,
+    .navbar-menu button {
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    .navbar-menu a:hover,
+    .navbar-menu button:hover {
+      background-color: #edf2f7;
+    }
+
+    .hero {
+      height: 100vh;
+      background: linear-gradient(to right, #004080, #0066cc);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 0 1rem;
+    }
+
+    .hero h1 {
+      font-size: 4rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+
+    .hero p {
+      font-size: 1.5rem;
+      margin-bottom: 2.5rem;
+      max-width: 700px;
+    }
+
+    .hero .btn {
+      padding: 0.85rem 2.5rem;
+      font-size: 1.125rem;
+      border-radius: 30px;
+      font-weight: 600;
+      background-color: #ffffff;
+      color: #004080;
+      border: none;
+      transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    .hero .btn:hover {
+      background-color: #e6f0ff;
+    }
+
+    .section {
+      padding: 5rem 2rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      text-align: center;
+      margin-bottom: 2.5rem;
+      color: #1a202c;
+    }
+
+    .info-blocks {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2.5rem;
+    }
+
+    .info-card {
+      background-color: #fff;
+      padding: 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 6px 10px rgba(0,0,0,0.06);
+      transition: transform 0.3s ease;
+    }
+
+    .info-card:hover {
+      transform: translateY(-6px);
+    }
+
+    .info-card h3 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: #004080;
+    }
+
+    .info-card p {
+      font-size: 1.05rem;
+      color: #555;
+    }
+
+    .cta {
+      max-width: 1100px;
+      margin: 4rem auto;
+      background: #ffffff;
+      padding: 4rem 2rem;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+
+    .cta h2 {
+      font-size: 2.5rem;
+      margin-bottom: 1.25rem;
+      color: #004080;
+    }
+
+    .cta p {
+      font-size: 1.125rem;
+      margin-bottom: 2.5rem;
+      color: #444;
+    }
+
+    .cta .btn {
+      background: #004080;
+      color: white;
+      padding: 0.85rem 2.5rem;
+      font-size: 1.125rem;
+      border-radius: 30px;
+      border: none;
+    }
+
+    .cta .btn:hover {
+      background: #003366;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="#" class="brand">JobConnect</a>
+    <div class="navbar-menu">
+      <a href="/login">Login</a>
+      <a href="/register">Register</a>
+      <button id="logoutButton" onclick="logout()" style="display: none;">Logout</button>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h1>Empower Your Career</h1>
+    <p>Discover meaningful opportunities and connect with forward-thinking companies that value your skills.</p>
+    <a href="/register" class="btn">Get Started</a>
+  </section>
+
+  <section class="section">
+    <h2 class="section-title">Why Professionals Choose Us</h2>
+    <div class="info-blocks">
+      <div class="info-card">
+        <h3>Precise Matching</h3>
+        <p>We recommend positions tailored to your experience and goals.</p>
+      </div>
+      <div class="info-card">
+        <h3>Trusted Employers</h3>
+        <p>Partnered with industry-leading companies across various sectors.</p>
+      </div>
+      <div class="info-card">
+        <h3>Privacy First</h3>
+        <p>Your information is encrypted and never sold or shared.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta">
+    <h2>Ready to Take the Next Step?</h2>
+    <p>Join thousands of professionals advancing their careers with JobConnect.</p>
+    <a href="/register" class="btn">Create Account</a>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      const logoutButton = document.getElementById('logoutButton');
+
+      if (isLoggedIn) {
+        logoutButton.style.display = 'block';
+      } else {
+        logoutButton.style.display = 'none';
+      }
+    });
+
+    function logout() {
+      localStorage.removeItem('isLoggedIn');
+      alert('You have been logged out.');
+      window.location.href = '/login';
+    }
+  </script>
+</body>
+</html>
